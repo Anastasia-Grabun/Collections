@@ -134,11 +134,11 @@ public class Main {
             }
 
         } catch (InterruptedException e) {
-            System.out.println("Приложение было прервано");
+            System.out.println("The app was interrupted");
             Thread.currentThread().interrupt();
         } finally {
             counter.stop();
-            System.out.println("Счетчик остановлен. Финальная статистика:");
+            System.out.println("Counter was interrupted. Final statistics:");
             System.out.println(counter.getAllCounts());
         }
 
