@@ -38,10 +38,27 @@ public class Tasks {
      *  Реализуйте метод для слияния двух отсортированных списков в один
      *  отсортированный список без использования Collections.sort().
      *  **/
-
-    //TODO:
     public static List<Integer> mergeSortedLists(List<Integer> list1, List<Integer> list2) {
        List<Integer> result = new ArrayList<>();
+       int i = 0, j = 0;
+
+       while(i < list1.size() && j < list2.size()){
+           if(list1.get(i) < list2. get(j)){
+               result.add(list1.get(i++));
+           } else{
+               result.add(list2.get(j++));
+           }
+       }
+
+       while(i < list1.size()){
+           result.add(list1.get(i++));
+       }
+
+        while(j < list2.size()){
+            result.add(list1.get(j++));
+        }
+
+        return result;
     }
 
     /**### 4. Поиск пересечения множеств
