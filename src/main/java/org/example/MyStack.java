@@ -9,7 +9,9 @@ import java.util.List;
  который реализует базовые операции стека (push, pop, peek, isEmpty) используя ArrayList.**/
 
 public class MyStack<T> {
+
     private List<T> elements;
+
     public MyStack() {
         elements = new ArrayList<>();
     }
