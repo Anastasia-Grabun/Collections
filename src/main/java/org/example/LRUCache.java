@@ -29,5 +29,9 @@ public class LRUCache<K, V> {
         cache.put(key, value);
     }
 
+    public Map<K, V> getCacheContent() {
+        return new LinkedHashMap<>(cache);
+    }
+
 }
 

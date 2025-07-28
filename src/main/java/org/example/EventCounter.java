@@ -3,6 +3,9 @@ package org.example;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**### 11. Реализация многопоточного счетчика событий
 Создайте потокобезопасный класс EventCounter,
@@ -18,6 +21,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class EventCounter {
     private final Map<String, EventData> events;
     private volatile long defaultTTL = -1;
+
+    private final ScheduledExecutorService cleaner = Executors.newSingleThreadScheduledExecutor();
+
+
+    public void stop() {
+        cleaner.shutdown();
+    }
 
     public EventCounter() {
         this.events = new ConcurrentHashMap<>();
@@ -90,6 +100,10 @@ public class EventCounter {
 
     public void cleanUpExpired() {
         events.entrySet().removeIf(entry -> entry.getValue().isExpired());
+    }
+
+    public void startAutoCleanup(long period, TimeUnit unit) {
+        cleaner.scheduleAtFixedRate(this::cleanUpExpired, period, period, unit);
     }
 
 }
